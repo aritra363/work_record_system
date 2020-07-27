@@ -22,7 +22,7 @@ function fetchData(value) {
                       <td>${index+1}</td>
                       <td> <input type="text" id="name${+item['id']}" class="form-control"  value="${item['Name']}"></td>
                       <td> <input type="text" id="work_type${+item['id']}" class="form-control"  value="${item['Work_Type']}"></td>
-                      <td> <input type="date"id="e_date${+item['id']}" class="form-control"  value="${item['End_Date']}"></td>
+                      <td> <input type="date"id="e_date${+item['id']}" class="form-control" min="${Todaydate()}"  value="${item['End_Date']}"></td>
                       <td>Rs.<input type="number"id="pd${+item['id']}" class="form-control"  value="${item['Payment_dn']}"></td>
                       <td>Rs.<input type="number"id="pl${+item['id']}" class="form-control"  value="${item['Payment_lt']}"></td>
                       <td><button type="button" onclick="edit(${item['id']})" class="btn btn-info">Edit</button>&nbsp;&nbsp;<button type="button" onclick="del(${item['id']})" class="btn btn-info">Delete</button></td>
@@ -37,6 +37,16 @@ function fetchData(value) {
         table.innerHTML += `<tbody id="no-record"><tr><td colspan='7' style='text-align:center;'>No records found</td><tr></tbody>`;
     })
 }
+function Todaydate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    return today;
+}
+Todaydate();
 function load_data() {
     let table = document.querySelector('.table');
     let search_bar = document.querySelector('.search-bar');
@@ -71,7 +81,7 @@ function add_data() {
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">End Date</label>
-      <input type="date" class="form-control" id="e_date">
+      <input type="date" class="form-control" min="${Todaydate()}" id="e_date">
     </div>
     <div class="form-group">
     <label for="exampleInputPassword1">Payment Done</label>
