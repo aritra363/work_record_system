@@ -1,8 +1,15 @@
-function fetchData() {
+function fetchData(value) {
     let table = document.querySelector('.table');
     let home = document.querySelector('#home');
     home.disabled = true;
-    let url = 'backend/fetchData.php?fetch=1';
+    let url,c;
+    if (value === undefined) {
+        url = 'backend/fetchData.php?fetch=1';
+        c=1;
+    } else {
+        url = 'backend/fetchData.php?search='+value;
+        c=0;
+    }
     let spinner = document.querySelector('.spinner');
     table.innerHTML += `<tbody id="data"></tbody>`;
     let table_data = document.querySelector('#data');
@@ -22,12 +29,12 @@ function fetchData() {
                     </tr>`;
             });
         } else {
-            table.innerHTML += `<tbody><tr><td colspan='7' style='text-align:center;'>No records found</td><tr></tbody>`;
+            table.innerHTML += `<tbody id="no-record"><tr><td colspan='7' style='text-align:center;'>No records found</td><tr></tbody>`;
         }
     })
     .catch(error => {
         console.log(error);
-        table.innerHTML += `<tbody><tr><td colspan='7' style='text-align:center;'>No records found</td><tr></tbody>`;
+        table.innerHTML += `<tbody id="no-record"><tr><td colspan='7' style='text-align:center;'>No records found</td><tr></tbody>`;
     })
 }
 function load_data() {
@@ -117,5 +124,11 @@ function edit(id) {
     });
 }
 function search(value) {
- console.log(value)
+    let table_data = document.querySelector('#data');
+    let no_record = document.querySelector('#no-record');
+    table_data.remove();
+    if (no_record !== null) {
+        no_record.remove();
+    }
+    fetchData(value);
 }
