@@ -1,0 +1,26 @@
+.navbar-brand {
+    margin-right:60%;
+}
+.nav-link{
+    cursor: pointer;
+}
+.container-fluid{
+    margin-top: 30px;
+}
+.record-container {
+    margin: 0 auto;
+    width:100%;
+}
+.table .thead-dark th {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.spinner{
+    display:block;
+}
+.search-bar{
+    width:60%;
+    height:fit-content;
+    margin: 0 auto;
+}
